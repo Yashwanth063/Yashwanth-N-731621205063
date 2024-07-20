@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        * {
+            color: green;
+        }
+        table{
+            width: 2px solid 40%;
+        }
+
+        #head{
+            border: 3px solid blue;
+            text-align: center;
+            width: 50%;
+        }
+        .tab{
+            border: 3px solid red;
+            width: 50%;
+        }
+        tr:nth-child(odd){
+            background-color:orange
+        }
+        tr:nth-child(even){
+            background-color:yellow
+        }
+        th:nth-child(even){
+
+            background-color:white;
+            
+        }
+            </style>
+</head>
+<body>
+    <h1 id="head">This is Heading</h1>
+    <br>
+    <table border="2" class="tab">
+        <tr> <th>Eid</th> <th>Name</th> <th>Age</th> </tr>
+        <tr> <td>927</td> <td>yash</td> <td>20</td> </tr>
+        <tr> <td>5540</td> <td>shubham</td> <td>21</td> </tr>
+    </table>
+</body>
+</html>
