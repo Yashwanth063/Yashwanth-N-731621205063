@@ -1,0 +1,21 @@
+<h1>Angular app</h1>
+<br>
+Name:{{name}};
+<br>Age:{{age}};
+<br>email:{{email}};
+
+<br>
+<h1>Property binding</h1>
+<br>Email: <input type="text" [value]="name"/>
+<br>Age: <input type="text" [value]="age"/>
+<br>Email: <input type="text" [value]="email"/>
+
+<br>
+<h2>Event binding</h2>
+<button (click)="change()">ChangeName</button>
+<button (click)="changeage()">ChangeName</button>
+<button (click)="changeemail()">ChangeName</button>
+<br>
+<br>
+<img [src]="imageone" width="200px" height="200px" > <br>
+<button (click)="Image()  ">ChangeImage</button>
