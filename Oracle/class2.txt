@@ -1,0 +1,503 @@
+SQL> create table tbl_em(eid number(5),ename varchar2(20),eage number(3),esalary number(10));
+
+Table created.
+
+SQL> insert into tbl_em(10,'yash',28,29299);
+insert into tbl_em(10,'yash',28,29299)
+                   *
+ERROR at line 1:
+ORA-00928: missing SELECT keyword
+
+
+SQL> insert into tbl_em values(10,'yash',28,29299);
+
+1 row created.
+
+SQL> insert into tbl_em values(20,'glad',16,166666);
+
+1 row created.
+
+SQL> insert into tbl_em values(14,'diva',16,696969);
+
+1 row created.
+
+SQL> insert into tbl_em values(69,'hardeep',11,11111);
+
+1 row created.
+
+SQL> select *from tbl_em;
+
+       EID ENAME                      EAGE    ESALARY
+---------- -------------------- ---------- ----------
+        10 yash                         28      29299
+        20 glad                         16     166666
+        14 diva                         16     696969
+        69 hardeep                      11      11111
+
+SQL> select * from tbl_em where eid in (10,28,69);
+
+       EID ENAME                      EAGE    ESALARY
+---------- -------------------- ---------- ----------
+        10 yash                         28      29299
+        69 hardeep                      11      11111
+
+SQL> select * from tbl_em where eid not in (14,10);
+
+       EID ENAME                      EAGE    ESALARY
+---------- -------------------- ---------- ----------
+        20 glad                         16     166666
+        69 hardeep                      11      11111
+
+SQL> select * from tbl_em where esalary between 50000 and 500000;
+
+       EID ENAME                      EAGE    ESALARY
+---------- -------------------- ---------- ----------
+        20 glad                         16     166666
+
+SQL> select * from tbl_em where esalary not between 50000 and 500000;
+
+       EID ENAME                      EAGE    ESALARY
+---------- -------------------- ---------- ----------
+        10 yash                         28      29299
+        14 diva                         16     696969
+        69 hardeep                      11      11111
+
+SQL> select * from tbl_em where esalary between 50000 and 5000000;
+
+       EID ENAME                      EAGE    ESALARY
+---------- -------------------- ---------- ----------
+        20 glad                         16     166666
+        14 diva                         16     696969
+
+SQL> select * from tbl_em where esalary between 50000 and 5000000100;
+
+       EID ENAME                      EAGE    ESALARY
+---------- -------------------- ---------- ----------
+        20 glad                         16     166666
+        14 diva                         16     696969
+
+SQL> select * from tbl_em where esalary between 50000000000 and 5000000100;
+
+no rows selected
+
+SQL> select * from tbl_em
+  2
+SQL> select * from tbl_em;
+
+       EID ENAME                      EAGE    ESALARY
+---------- -------------------- ---------- ----------
+        10 yash                         28      29299
+        20 glad                         16     166666
+        14 diva                         16     696969
+        69 hardeep                      11      11111
+
+SQL> select * from tbl_em where eid(20,14,30) and esalary<200
+00;
+select * from tbl_em where eid(20,14,30) and esalary<20000
+                                         *
+ERROR at line 1:
+ORA-00920: invalid relational operator
+
+
+SQL> select * from tbl_em where eid in (20,14,30) and esalary
+<20000;
+
+no rows selected
+
+SQL> select * from tbl_em where eid in (20,14,30) and esalary>2000000;
+
+no rows selected
+
+SQL> select * from tbl_em where eid in (20,14,30) and esalary>20000;
+
+       EID ENAME                      EAGE    ESALARY
+---------- -------------------- ---------- ----------
+        20 glad                         16     166666
+        14 diva                         16     696969
+
+SQL> desc tbl_em;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EID                                                NUMBER(5)
+ ENAME                                              VARCHAR2(20)
+ EAGE                                               NUMBER(3)
+ ESALARY                                            NUMBER(10)
+
+SQL> insert into tbl_em(30,'ram');
+insert into tbl_em(30,'ram')
+                   *
+ERROR at line 1:
+ORA-00928: missing SELECT keyword
+
+
+SQL> insert into tbl_em values(30,'ram');
+insert into tbl_em values(30,'ram')
+            *
+ERROR at line 1:
+ORA-00947: not enough values
+
+
+SQL> select * from tbl_em;
+
+       EID ENAME                      EAGE    ESALARY
+---------- -------------------- ---------- ----------
+        10 yash                         28      29299
+        20 glad                         16     166666
+        14 diva                         16     696969
+        69 hardeep                      11      11111
+
+SQL> insert into tbl_em (eid,eage) values(22,32);
+
+1 row created.
+
+SQL> select * from tbl_em;
+
+       EID ENAME                      EAGE    ESALARY
+---------- -------------------- ---------- ----------
+        10 yash                         28      29299
+        20 glad                         16     166666
+        14 diva                         16     696969
+        69 hardeep                      11      11111
+        22                              32
+
+SQL> select * from tbl_emp where ename is null;
+select * from tbl_emp where ename is null
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> select * from tbl_em where ename is null;
+
+       EID ENAME                      EAGE    ESALARY
+---------- -------------------- ---------- ----------
+        22                              32
+
+SQL> update tbl_em set esalary = 30000 where eid =22;
+
+1 row updated.
+
+SQL> select * from tbl_em;
+
+       EID ENAME                      EAGE    ESALARY
+---------- -------------------- ---------- ----------
+        10 yash                         28      29299
+        20 glad                         16     166666
+        14 diva                         16     696969
+        69 hardeep                      11      11111
+        22                              32      30000
+
+SQL> select * from tbl_emp where ename like '_a%';
+select * from tbl_emp where ename like '_a%'
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> select * from tbl_em where ename like '_a%';
+
+       EID ENAME                      EAGE    ESALARY
+---------- -------------------- ---------- ----------
+        10 yash                         28      29299
+        69 hardeep                      11      11111
+
+SQL> select * from tbl_em where ename like 'a%';
+
+no rows selected
+
+SQL> select * from tbl_em where ename like '%a';
+
+       EID ENAME                      EAGE    ESALARY
+---------- -------------------- ---------- ----------
+        14 diva                         16     696969
+
+SQL> select * from tbl_em where ename not like '%a';
+
+       EID ENAME                      EAGE    ESALARY
+---------- -------------------- ---------- ----------
+        10 yash                         28      29299
+        20 glad                         16     166666
+        69 hardeep                      11      11111
+
+SQL> select * from tbl_em;
+
+       EID ENAME                      EAGE    ESALARY
+---------- -------------------- ---------- ----------
+        10 yash                         28      29299
+        20 glad                         16     166666
+        14 diva                         16     696969
+        69 hardeep                      11      11111
+        22                              32      30000
+
+SQL> select * from tbl_em order by eid;
+
+       EID ENAME                      EAGE    ESALARY
+---------- -------------------- ---------- ----------
+        10 yash                         28      29299
+        14 diva                         16     696969
+        20 glad                         16     166666
+        22                              32      30000
+        69 hardeep                      11      11111
+
+SQL> select * from tbl_em order by ename;
+
+       EID ENAME                      EAGE    ESALARY
+---------- -------------------- ---------- ----------
+        14 diva                         16     696969
+        20 glad                         16     166666
+        69 hardeep                      11      11111
+        10 yash                         28      29299
+        22                              32      30000
+
+SQL> select * from tbl_em order by eid  desc;
+
+       EID ENAME                      EAGE    ESALARY
+---------- -------------------- ---------- ----------
+        69 hardeep                      11      11111
+        22                              32      30000
+        20 glad                         16     166666
+        14 diva                         16     696969
+        10 yash                         28      29299
+
+SQL> select * from tbl_em;
+
+       EID ENAME                      EAGE    ESALARY
+---------- -------------------- ---------- ----------
+        10 yash                         28      29299
+        20 glad                         16     166666
+        14 diva                         16     696969
+        69 hardeep                      11      11111
+        22                              32      30000
+
+SQL> alter table tbl_em add doj date;
+
+Table altered.
+
+SQL> select * from tbl_em;
+
+       EID ENAME                      EAGE    ESALARY DOJ
+---------- -------------------- ---------- ---------- ---------
+        10 yash                         28      29299
+        20 glad                         16     166666
+        14 diva                         16     696969
+        69 hardeep                      11      11111
+        22                              32      30000
+
+SQL> update tbl_emp set doj=sysdate where eid =10;
+update tbl_emp set doj=sysdate where eid =10
+       *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> update tbl_em set doj=sysdate where eid =10;
+
+1 row updated.
+
+SQL> select * from tbl_em;
+
+       EID ENAME                      EAGE    ESALARY DOJ
+---------- -------------------- ---------- ---------- ---------
+        10 yash                         28      29299 07-AUG-24
+        20 glad                         16     166666
+        14 diva                         16     696969
+        69 hardeep                      11      11111
+        22                              32      30000
+
+SQL> update tbl_emp set doj='05-aug-24' where eid =10,14;
+update tbl_emp set doj='05-aug-24' where eid =10,14
+                                                *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended
+
+
+SQL> update tbl_emp set doj='05-aug-24' where eid in (10,14);
+
+update tbl_emp set doj='05-aug-24' where eid in (10,14)
+       *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> update tbl_em set doj='05-aug-24' where eid in (10,14);
+
+2 rows updated.
+
+SQL> select * from tbl_em;
+
+       EID ENAME                      EAGE    ESALARY DOJ
+---------- -------------------- ---------- ---------- ---------
+        10 yash                         28      29299 05-AUG-24
+        20 glad                         16     166666
+        14 diva                         16     696969 05-AUG-24
+        69 hardeep                      11      11111
+        22                              32      30000
+     select * from tbl_em;
+SQL>
+       EID ENAME                      EAGE    ESALARY DOJ
+---------- -------------------- ---------- ---------- ---------
+        10 yash                         28      29299 05-AUG-24
+        20 glad                         16     166666
+        14 diva                         16     696969 05-AUG-24
+        69 hardeep                      11      11111
+        22                              32      30000
+
+SQL> alter table tbl_em drop coloumn doj;
+alter table tbl_em drop coloumn doj
+                        *
+ERROR at line 1:
+ORA-00905: missing keyword
+
+
+SQL> alter table tbl_em drop column doj;
+
+Table altered.
+
+SQL> select * from tbl_em;
+
+       EID ENAME                      EAGE    ESALARY
+---------- -------------------- ---------- ----------
+        10 yash                         28      29299
+        20 glad                         16     166666
+        14 diva                         16     696969
+        69 hardeep                      11      11111
+        22                              32      30000
+
+SQL> desc tbl_em;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EID                                                NUMBER(5)
+ ENAME                                              VARCHAR2(20)
+ EAGE                                               NUMBER(3)
+ ESALARY                                            NUMBER(10)
+
+SQL> alter table tbl_em modify esalary number(3);
+alter table tbl_em modify esalary number(3)
+                          *
+ERROR at line 1:
+ORA-01440: column to be modified must be empty to decrease precision or scale
+
+
+SQL> alter table tbl_em modify esalary number(15);
+
+Table altered.
+
+SQL> desc tbl_em;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EID                                                NUMBER(5)
+ ENAME                                              VARCHAR2(20)
+ EAGE                                               NUMBER(3)
+ ESALARY                                            NUMBER(15)
+
+SQL> alter tbl_em rename column esalary to sambalam;
+alter tbl_em rename column esalary to sambalam
+      *
+ERROR at line 1:
+ORA-00940: invalid ALTER command
+
+
+SQL> alter table tbl_em rename column esalary to sambalam;
+
+Table altered.
+
+SQL> select * from tbl_em;
+
+       EID ENAME                      EAGE   SAMBALAM
+---------- -------------------- ---------- ----------
+        10 yash                         28      29299
+        20 glad                         16     166666
+        14 diva                         16     696969
+        69 hardeep                      11      11111
+        22                              32      30000
+
+SQL> rollback;
+
+Rollback complete.
+
+SQL> select * from tbl_em;
+
+       EID ENAME                      EAGE   SAMBALAM
+---------- -------------------- ---------- ----------
+        10 yash                         28      29299
+        20 glad                         16     166666
+        14 diva                         16     696969
+        69 hardeep                      11      11111
+        22                              32      30000
+
+SQL> select * from tbl_em;
+
+       EID ENAME                      EAGE   SAMBALAM
+---------- -------------------- ---------- ----------
+        10 yash                         28      29299
+        20 glad                         16     166666
+        14 diva                         16     696969
+        69 hardeep                      11      11111
+        22                              32      30000
+
+SQL> alter tble tbl_em tbl_emp to emp;
+alter tble tbl_em tbl_emp to emp
+      *
+ERROR at line 1:
+ORA-00940: invalid ALTER command
+
+
+SQL> alter tble tbl_em rename tbl_emp to emp;
+alter tble tbl_em rename tbl_emp to emp
+      *
+ERROR at line 1:
+ORA-00940: invalid ALTER command
+
+
+SQL> alter tble tbl_em rename tbl_em to emp;
+alter tble tbl_em rename tbl_em to emp
+      *
+ERROR at line 1:
+ORA-00940: invalid ALTER command
+
+
+SQL> rename tbl_em to emp;
+
+Table renamed.
+
+SQL> drop table emp;
+
+Table dropped.
+
+SQL> flashback table emp;
+flashback table emp
+*
+ERROR at line 1:
+ORA-00439: feature not enabled: Flashback Table
+
+
+SQL>  create table tbl_em(eid number(5),ename varchar2(20),eage number(3),esalary number(10));
+
+Table created.
+
+SQL>  insert into tbl_em values(10,'yash',28,29299);
+
+1 row created.
+
+SQL> insert into tbl_em values(69,'hardeep',11,11111);
+
+1 row created.
+
+SQL> rename tbl_em to emp;
+
+Table renamed.
+
+SQL> select * from emp;
+
+       EID ENAME                      EAGE    ESALARY
+---------- -------------------- ---------- ----------
+        10 yash                         28      29299
+        69 hardeep                      11      11111
+
+SQL> truncate table emp;
+
+Table truncated.
+
+SQL> select * from emp;
+
+no rows selected

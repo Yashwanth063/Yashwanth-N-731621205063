@@ -1,0 +1,361 @@
+SQL> create table client_master(client_no varchar2(10),name varchar2(20),city varchar2(30),pincode number(10),bal_due number(20));
+
+Table created.
+
+SQL> desc client_master;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CLIENT_NO                                          VARCHAR2(10)
+ NAME                                               VARCHAR2(20)
+ CITY                                               VARCHAR2(30)
+ PINCODE                                            NUMBER(10)
+ BAL_DUE                                            NUMBER(20)
+
+SQL> insert into client_master('c00001','smitha jain','mumbai',400054,15000);
+insert into client_master('c00001','smitha jain','mumbai',400054,15000)
+                          *
+ERROR at line 1:
+ORA-00928: missing SELECT keyword
+
+
+SQL> insert into client_master values('c00001','smitha jain','mumbai',400054,15000);
+
+1 row created.
+
+SQL> insert into client_master values('c00002','vandana rao','chennai',780001,0);
+
+1 row created.
+
+SQL> insert into client_master values('c00003','prem pujari','mumbai',400057,5000);
+
+1 row created.
+
+SQL> insert into client_master values('c00004','basu nath','mumbai',400056,0);
+
+1 row created.
+
+SQL> insert into client_master values('c00005','ravi shankar','delhi',100001,2000);
+
+
+1 row created.
+
+SQL> insert into client_master values('c00006','roopa','mumbai',400050,0);
+
+1 row created.
+
+SQL> select * from client_master;
+
+CLIENT_NO  NAME                 CITY                              PINCODE
+---------- -------------------- ------------------------------ ----------
+   BAL_DUE
+----------
+c00001     smitha jain          mumbai                             400054
+     15000
+
+c00002     vandana rao          chennai                            780001
+         0
+
+c00003     prem pujari          mumbai                             400057
+      5000
+
+
+CLIENT_NO  NAME                 CITY                              PINCODE
+---------- -------------------- ------------------------------ ----------
+   BAL_DUE
+----------
+c00004     basu nath            mumbai                             400056
+         0
+
+c00005     ravi shankar         delhi                              100001
+      2000
+
+c00006     roopa                mumbai                             400050
+         0
+
+
+6 rows selected.
+
+SQL> select * from client_master where bal_due = 0;
+
+CLIENT_NO  NAME                 CITY                              PINCODE
+---------- -------------------- ------------------------------ ----------
+   BAL_DUE
+----------
+c00002     vandana rao          chennai                            780001
+         0
+
+c00004     basu nath            mumbai                             400056
+         0
+
+c00006     roopa                mumbai                             400050
+         0
+
+
+SQL> update client_master set city = 'jaipur' where client_no = c00004;
+update client_master set city = 'jaipur' where client_no = c00004
+                                                           *
+ERROR at line 1:
+ORA-00904: "C00004": invalid identifier
+
+
+SQL> update client_master set city = 'jaipur' where client_no = 'c00004';
+
+1 row updated.
+
+SQL> select * from client_master where city ='mumbai';
+
+CLIENT_NO  NAME                 CITY                              PINCODE
+---------- -------------------- ------------------------------ ----------
+   BAL_DUE
+----------
+c00001     smitha jain          mumbai                             400054
+     15000
+
+c00003     prem pujari          mumbai                             400057
+      5000
+
+c00006     roopa                mumbai                             400050
+         0
+
+
+SQL> create table sale_order(order_no varchar2(15),order_date varchar2(15),client_n
+o varchar2(15),salesman_no number(10),dely_date varchar2(20),order_status varchar(2
+5));
+
+Table created.
+
+SQL> desc sale_order
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ORDER_NO                                           VARCHAR2(15)
+ ORDER_DATE                                         VARCHAR2(15)
+ CLIENT_NO                                          VARCHAR2(15)
+ SALESMAN_NO                                        NUMBER(10)
+ DELY_DATE                                          VARCHAR2(20)
+ ORDER_STATUS                                       VARCHAR2(25)
+
+SQL> drop table sale_order;
+
+Table dropped.
+
+SQL> create table sale_order(order_no varchar2(15),order_date varchar2(15),client_no varchar2(15),salesman_no varchar2(15),dely_date varchar2(20),order_status varchar
+(25));
+
+Table created.
+
+SQL> desc sale_order;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ORDER_NO                                           VARCHAR2(15)
+ ORDER_DATE                                         VARCHAR2(15)
+ CLIENT_NO                                          VARCHAR2(15)
+ SALESMAN_NO                                        VARCHAR2(15)
+ DELY_DATE                                          VARCHAR2(20)
+ ORDER_STATUS                                       VARCHAR2(25)
+
+SQL> insert into sale_order values('o19001','12-jan-13','c00001','s00001','20-jan-1
+3','in process');
+
+1 row created.
+
+SQL> insert into sale_order values('o19002','25-jan-13','c00002','s00002','27-jan-1
+3','cancelled');
+
+1 row created.
+
+SQL> insert into sale_order values('o46865','18-feb-13','c00003','s00003','20-feb-1
+3','fulfilled');
+
+1 row created.
+
+SQL> insert into sale_order values('o19003','03-apr-13','c00004','s00001','07-apr-1
+3','fulfilled');
+
+1 row created.
+
+SQL> desc sale_order;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ORDER_NO                                           VARCHAR2(15)
+ ORDER_DATE                                         VARCHAR2(15)
+ CLIENT_NO                                          VARCHAR2(15)
+ SALESMAN_NO                                        VARCHAR2(15)
+ DELY_DATE                                          VARCHAR2(20)
+ ORDER_STATUS                                       VARCHAR2(25)
+
+SQL> select * from sale-order;
+select * from sale-order
+                  *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended
+
+
+SQL> select * from sale_order;
+
+ORDER_NO        ORDER_DATE      CLIENT_NO       SALESMAN_NO
+--------------- --------------- --------------- ---------------
+DELY_DATE            ORDER_STATUS
+-------------------- -------------------------
+o19001          12-jan-13       c00001          s00001
+20-jan-13            in process
+
+o19002          25-jan-13       c00002          s00002
+27-jan-13            cancelled
+
+o46865          18-feb-13       c00003          s00003
+20-feb-13            fulfilled
+
+
+ORDER_NO        ORDER_DATE      CLIENT_NO       SALESMAN_NO
+--------------- --------------- --------------- ---------------
+DELY_DATE            ORDER_STATUS
+-------------------- -------------------------
+o19003          03-apr-13       c00004          s00001
+07-apr-13            fulfilled
+
+
+SQL> delete from sale_order where order_no = 'o19003';
+
+1 row deleted.
+
+SQL> select * from sale_order;
+
+ORDER_NO        ORDER_DATE      CLIENT_NO       SALESMAN_NO
+--------------- --------------- --------------- ---------------
+DELY_DATE            ORDER_STATUS
+-------------------- -------------------------
+o19001          12-jan-13       c00001          s00001
+20-jan-13            in process
+
+o19002          25-jan-13       c00002          s00002
+27-jan-13            cancelled
+
+o46865          18-feb-13       c00003          s00003
+20-feb-13            fulfilled
+
+
+SQL> insert into sale_order values('o19003','03-apr-13','c00001','s00001','07-apr-13','fulfilled');
+7-aprselect * from sale_order;
+
+ORDER_NO        ORDER_DATE      CLIENT_NO       SALESMAN_NO
+--------------- --------------- --------------- ---------------
+DELY_DATE            ORDER_STATUS
+-------------------- -------------------------
+o19001          12-jan-13       c00001          s00001
+20-jan-13            in process
+
+o19002          25-jan-13       c00002          s00002
+27-jan-13            cancelled
+
+o46865          18-feb-13       c00003          s00003
+20-feb-13            fulfilled
+
+
+SQL> insert into sale_order values('o19003','03-apr-13','c00001','s00001','07-apr-13','fulfilled');
+
+1 row created.
+
+SQL> insert into sale_order values('o19003','03-apr-13','c00004','s00002','07-apr-13','fulfilled');
+
+1 row created.
+
+SQL> delete from sale_order where order_no = 'o46886';
+
+0 rows deleted.
+
+SQL> select * from sale_order;
+
+ORDER_NO        ORDER_DATE      CLIENT_NO       SALESMAN_NO
+--------------- --------------- --------------- ---------------
+DELY_DATE            ORDER_STATUS
+-------------------- -------------------------
+o19001          12-jan-13       c00001          s00001
+20-jan-13            in process
+
+o19002          25-jan-13       c00002          s00002
+27-jan-13            cancelled
+
+o46865          18-feb-13       c00003          s00003
+20-feb-13            fulfilled
+
+
+ORDER_NO        ORDER_DATE      CLIENT_NO       SALESMAN_NO
+--------------- --------------- --------------- ---------------
+DELY_DATE            ORDER_STATUS
+-------------------- -------------------------
+o19003          03-apr-13       c00001          s00001
+07-apr-13            fulfilled
+
+o19003          03-apr-13       c00004          s00002
+07-apr-13            fulfilled
+
+
+SQL> delete from sale_order where client_no = 'c00004';
+
+1 row deleted.
+
+SQL> select * from sale_order;
+
+ORDER_NO        ORDER_DATE      CLIENT_NO       SALESMAN_NO
+--------------- --------------- --------------- ---------------
+DELY_DATE            ORDER_STATUS
+-------------------- -------------------------
+o19001          12-jan-13       c00001          s00001
+20-jan-13            in process
+
+o19002          25-jan-13       c00002          s00002
+27-jan-13            cancelled
+
+o46865          18-feb-13       c00003          s00003
+20-feb-13            fulfilled
+
+
+ORDER_NO        ORDER_DATE      CLIENT_NO       SALESMAN_NO
+--------------- --------------- --------------- ---------------
+DELY_DATE            ORDER_STATUS
+-------------------- -------------------------
+o19003          03-apr-13       c00001          s00001
+07-apr-13            fulfilled
+
+
+SQL> insert into sale_order values('o46866','03-apr-13','c00004','s00002','0
+7-apr-13','cancelled');
+
+1 row created.
+
+SQL> insert into sale_order values('o19008','24-may-13','c00005','s00004','2
+6-may-13','in process');
+
+1 row created.
+
+SQL> select * from sale_order;
+
+ORDER_NO        ORDER_DATE      CLIENT_NO       SALESMAN_NO
+--------------- --------------- --------------- ---------------
+DELY_DATE            ORDER_STATUS
+-------------------- -------------------------
+o19001          12-jan-13       c00001          s00001
+20-jan-13            in process
+
+o19002          25-jan-13       c00002          s00002
+27-jan-13            cancelled
+
+o46865          18-feb-13       c00003          s00003
+20-feb-13            fulfilled
+
+
+ORDER_NO        ORDER_DATE      CLIENT_NO       SALESMAN_NO
+--------------- --------------- --------------- ---------------
+DELY_DATE            ORDER_STATUS
+-------------------- -------------------------
+o19003          03-apr-13       c00001          s00001
+07-apr-13            fulfilled
+
+o46866          03-apr-13       c00004          s00002
+07-apr-13            cancelled
+
+o19008          24-may-13       c00005          s00004
+26-may-13            in process
+
+
+6 rows selected.
