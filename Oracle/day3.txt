@@ -1,0 +1,448 @@
+SQL> create table tbl_employee(eid number(5),ename varchar2(15),esalary number(10),dno number(5));
+
+Table created.
+
+SQL> insert into tbl_employee(101,'yash',7000,10);
+insert into tbl_employee(101,'yash',7000,10)
+                         *
+ERROR at line 1:
+ORA-00928: missing SELECT keyword
+
+
+SQL> insert into tbl_employee values(101,'yash',7000,10);
+
+1 row created.
+
+SQL> insert into tbl_employee values(102,'glad',3000,10);
+
+1 row created.
+
+SQL> insert into tbl_employee values(103,'vakar',4000,20);
+
+1 row created.
+
+SQL> insert into tbl_employee values(105,'ajay',5000,20);
+
+1 row created.
+
+SQL> select * from tbl_employee;
+
+       EID ENAME              ESALARY        DNO
+---------- --------------- ---------- ----------
+       101 yash                  7000         10
+       102 glad                  3000         10
+       103 vakar                 4000         20
+       105 ajay                  5000         20
+
+SQL> insert into tbl_employee values(104,'vijay',6000,30);
+
+1 row created.
+
+SQL> insert into tbl_employee (eid,esalary,dno) values(106,3000,30);
+
+1 row created.
+
+SQL> select * from tbl_employee;
+
+       EID ENAME              ESALARY        DNO
+---------- --------------- ---------- ----------
+       101 yash                  7000         10
+       102 glad                  3000         10
+       103 vakar                 4000         20
+       105 ajay                  5000         20
+       104 vijay                 6000         30
+       106                       3000         30
+
+6 rows selected.
+
+SQL> select dno,count(*) from tbl_employee group by dno;
+
+       DNO   COUNT(*)
+---------- ----------
+        30          2
+        20          2
+        10          2
+
+SQL> select dno,count(*), sum(esalary),avg(esalary),min(esalary),max(e
+salary) from tbl_employee  group by dno;
+
+       DNO   COUNT(*) SUM(ESALARY) AVG(ESALARY) MIN(ESALARY) MAX(ESALARY)
+---------- ---------- ------------ ------------ ------------ ------------
+        30          2         9000         4500         3000         6000
+        20          2         9000         4500         4000         5000
+        10          2        10000         5000         3000         7000
+
+SQL> select dno,count(*), sum(esalary),avg(esalary),min(esalary),max(esalary) from tbl_employee  group by dno order by dno;
+
+       DNO   COUNT(*) SUM(ESALARY) AVG(ESALARY) MIN(ESALARY) MAX(ESALARY)
+---------- ---------- ------------ ------------ ------------ ------------
+        10          2        10000         5000         3000         7000
+        20          2         9000         4500         4000         5000
+        30          2         9000         4500         3000         6000
+     select dno,count(*);
+select dno,count(*)
+                  *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected
+
+
+SQL> select dno,count(*) from tbl_employee ;
+select dno,count(*) from tbl_employee
+       *
+ERROR at line 1:
+ORA-00937: not a single-group group function
+
+
+SQL> select dno,count(*), sum(esalary),avg(esalary),min(esalary),max(esalary) from tbl_employee  group by having min(esalary) > 3000 dno ord
+er by dno;
+select dno,count(*), sum(esalary),avg(esalary),min(esalary),max(esalary) from tbl_employee  group by having min(esalary) > 3000 dno order by dno
+
+                               *
+ERROR at line 1:
+ORA-00936: missing expression
+
+
+SQL> select dno,count(*), sum(esalary),avg(esalary),min(esalary),max(esalary) from tbl_employee  group by having min(esalary) > 3000  order
+by dno;
+select dno,count(*), sum(esalary),avg(esalary),min(esalary),max(esalary) from tbl_employee  group by having min(esalary) > 3000  order by dno
+                                                                                                     *
+ERROR at line 1:
+ORA-00936: missing expression
+
+
+SQL> select dno,count(*), sum(esalary),avg(esalary),min(esalary),max(esalary) from tbl_employee  group by dno having min(esalary) > 3000 ord
+er by dno;
+
+
+SQL>            ----- ------------ ------------ ------------ ------------
+SQL>    20          2         9000         4500         4000         5000
+SQL>
+SQL>
+SQL>
+SQL> select dno,count(*), sum(esalary),avg(esalary),min(esalary),max(esalary) from tbl_employee  group by dno order by dno;
+
+       DNO   COUNT(*) SUM(ESALARY) AVG(ESALARY) MIN(ESALARY) MAX(ESALARY)
+---------- ---------- ------------ ------------ ------------ ------------
+        10          2        10000         5000         3000         7000
+        20          2         9000         4500         4000         5000
+        30          2         9000         4500         3000         6000
+
+SQL> create tbl_student(reg_no number(5) primary key
+  2  stud_name varchar2(20) not null ,
+  3  stud_email varchar2(20) unique,
+  4  stud_age number(3), check(stud_age >0),
+  5  stud_loc varchar2(20) default 'Erode');
+create tbl_student(reg_no number(5) primary key
+       *
+ERROR at line 1:
+ORA-00901: invalid CREATE command
+
+
+SQL>  create tbl_student(reg_no number(5) primary key
+  2    2  stud_name varchar2(20) not null ,
+  3    3  stud_email varchar2(20) unique,
+  4    4  stud_age number(3), check(stud_age >0),
+  5  select dno,count(*);
+ create tbl_student(reg_no number(5) primary key
+        *
+ERROR at line 1:
+ORA-00901: invalid CREATE command
+
+
+SQL> create tbl_student(reg_no number(5) primary key, stud_name varchar2(20) not null, stud_email varchar2(20) unique, stud_age number(3) check(stud_age>0), stud_loc varchar2(20) default 'erode');
+create tbl_student(reg_no number(5) primary key, stud_name varchar2(20) not null, stud_email varchar2(20) unique, stud_age number(3) check(stud_age>0), stud_loc varchar2(20) default 'erode')
+       *
+ERROR at line 1:
+ORA-00901: invalid CREATE command
+
+
+SQL> create table tbl_student(reg_no number(5) primary key, stud_name varchar2(20) not null, stud_email varchar2(20) unique, stud_age number(3) check(stud_age>0), stud_loc varchar2(20) default 'erode');
+
+Table created.
+
+SQL> desc tbl_student;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ REG_NO                                    NOT NULL NUMBER(5)
+ STUD_NAME                                 NOT NULL VARCHAR2(20)
+ STUD_EMAIL                                         VARCHAR2(20)
+ STUD_AGE                                           NUMBER(3)
+ STUD_LOC                                           VARCHAR2(20)
+
+SQL> insert into tbl_student values(101,'yash','yash@gmail.com',-2);
+insert into tbl_student values(101,'yash','yash@gmail.com',-2)
+            *
+ERROR at line 1:
+ORA-00947: not enough values
+
+
+SQL> insert into tbl_student values(101,'yash','yash@gmail.com',12,'tiruppur');
+
+1 row created.
+
+SQL> select * from tbl_student;
+
+    REG_NO STUD_NAME            STUD_EMAIL             STUD_AGE
+---------- -------------------- -------------------- ----------
+STUD_LOC
+--------------------
+       101 yash                 yash@gmail.com               12
+tiruppur
+
+
+SQL> insert into tbl_student (reg_no,stud_name,stud_email,stud_age) values(102,'hardeep','hardeep@gmail.com',25);
+
+1 row created.
+
+SQL> select * from tbl_student;
+
+    REG_NO STUD_NAME            STUD_EMAIL             STUD_AGE
+---------- -------------------- -------------------- ----------
+STUD_LOC
+--------------------
+       101 yash                 yash@gmail.com               12
+tiruppur
+
+       102 hardeep              hardeep@gmail.com            25
+erode
+
+
+SQL> insert into tbl_student values(166,'glad','glad@gmail.com',-2,'tiruppur');
+insert into tbl_student values(166,'glad','glad@gmail.com',-2,'tiruppur')
+*
+ERROR at line 1:
+ORA-02290: check constraint (SYSTEM.SYS_C007001) violated.
+
+
+SQL> create table dept(dno number(5) primary key, dname varchar2(20));
+
+Table created.
+
+SQL> create table emp(eid number(5) primary key, ename vrachar2(20),esalary number(5),dno number(5), foreign key (dno) references  department(dno));
+create table emp(eid number(5) primary key, ename vrachar2(20),esalary number(5),dno number(5), foreign key (dno) references  department(dno))
+                                                          *
+ERROR at line 1:
+ORA-00907: missing right parenthesis
+
+
+SQL> create table emp(eid number(5) primary key, ename varchar2(20),esalary number(5),dno number(5), foreign key (dno) references  department(dno));
+create table emp(eid number(5) primary key, ename varchar2(20),esalary number(5),dno number(5), foreign key (dno) references  department(dno))
+
+                                                             *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> create table emp(eid number(5) primary key, ename varchar2(20),esalary number(5),dno number(5), foreign key (dno) references  dept(dno));
+
+Table created.
+
+SQL> insert into employee values(101,'yash',2000,10);
+insert into employee values(101,'yash',2000,10)
+            *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> insert into emp values(101,'yash',2000,10);
+insert into emp values(101,'yash',2000,10)
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (SYSTEM.SYS_C007006) violated - parent key not
+found
+
+
+SQL> insert into dept values(101,'yash');
+
+1 row created.
+
+SQL> insert into emp values(101,'yash',2000,10);
+insert into emp values(101,'yash',2000,10)
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (SYSTEM.SYS_C007006) violated - parent key not
+found
+
+
+SQL> create view view1 as select * from emp where dno =10;
+
+View created.
+
+SQL> select * from view1;
+
+no rows selected
+
+SQL> select * from emp';
+ERROR:
+ORA-01756: quoted string not properly terminated
+
+
+SQL> select * from emp;
+
+no rows selected
+
+SQL> insert into emp values(63,'yash',2000,101);
+
+1 row created.
+
+SQL> select * from view1;
+
+no rows selected
+
+SQL> select * from emp;
+
+       EID ENAME                   ESALARY        DNO
+---------- -------------------- ---------- ----------
+        63 yash                       2000        101
+
+SQL> create view view1 as select * from emp where dno =101;
+create view view1 as select * from emp where dno =101
+            *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object
+
+
+SQL> drop view view1;
+
+View dropped.
+
+SQL> create view view1 as select * from emp where dno =101;
+
+View created.
+
+SQL> select * from emp;
+
+       EID ENAME                   ESALARY        DNO
+---------- -------------------- ---------- ----------
+        63 yash                       2000        101
+
+SQL> select * from view1;
+
+       EID ENAME                   ESALARY        DNO
+---------- -------------------- ---------- ----------
+        63 yash                       2000        101
+
+SQL> update view1 set eid=630 where dno = 101;
+
+1 row updated.
+
+SQL> select * from view1;
+
+       EID ENAME                   ESALARY        DNO
+---------- -------------------- ---------- ----------
+       630 yash                       2000        101
+
+SQL> select * from emp;
+
+       EID ENAME                   ESALARY        DNO
+---------- -------------------- ---------- ----------
+       630 yash                       2000        101
+
+SQL> alter view view1 drop esalary;
+alter view view1 drop esalary
+                      *
+ERROR at line 1:
+ORA-00905: missing keyword
+
+
+SQL> alter view view1 drop column esalary;
+alter view view1 drop column esalary
+                      *
+ERROR at line 1:
+ORA-00905: missing keyword
+
+
+SQL> delete from view1 where eid=630;
+
+1 row deleted.
+
+SQL> select * from emp;
+
+no rows selected
+
+SQL> create view view1 as select * from emp where dno =101;
+create view view1 as select * from emp where dno =101
+            *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object
+
+
+SQL> create view view2 as select * from emp where dno =101;
+
+View created.
+
+SQL> select * from view2;
+
+no rows selected
+
+SQL> drop view view2;
+
+View dropped.
+
+SQL> select * from tbl_emp;
+select * from tbl_emp
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> select * from tbl_employee;
+
+       EID ENAME              ESALARY        DNO
+---------- --------------- ---------- ----------
+       101 yash                  7000         10
+       102 glad                  3000         10
+       103 vakar                 4000         20
+       105 ajay                  5000         20
+       104 vijay                 6000         30
+       106                       3000         30
+
+6 rows selected.
+
+SQL> select eid,ename frm tbl_employee;
+select eid,ename frm tbl_employee
+                     *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected
+
+
+SQL> select eid,ename from tbl_employee;
+
+       EID ENAME
+---------- ---------------
+       101 yash
+       102 glad
+       103 vakar
+       105 ajay
+       104 vijay
+       106
+
+6 rows selected.
+
+SQL> select eid as 'emp id',ename 'emp name' from tbl_employee;
+select eid as 'emp id',ename 'emp name' from tbl_employee
+              *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected
+
+
+SQL> select eid as "emp id",ename "emp name" from tbl_employee;
+
+    emp id emp name
+---------- ---------------
+       101 yash
+       102 glad
+       103 vakar
+       105 ajay
+       104 vijay
+       106
+
+6 rows selected.
+
+SQL> select dno,count(*) as "total count" from tbl_employee group by dno;
+
+       DNO total count
+---------- -----------
+        30           2
+        20           2
+        10           2
